@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PMA</string>
+    <string name="map_areas">Number of preplanned map areas: %d</string>
 </resources>
