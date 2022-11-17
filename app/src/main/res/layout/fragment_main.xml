@@ -14,21 +14,15 @@
                     type="xyz.atharmon.pma.model.PortalItemViewModel" />
         </data>
 
-        <LinearLayout
-            android:orientation="vertical"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textfield"
-                    android:text="@{@string/map_areas(portalItemViewModel.numOfAreas)}"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <com.esri.arcgisruntime.mapping.view.MapView
-                    android:id="@+id/mapView"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/map_areas_recycler_view"
+                    android:scrollbars="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
-
-        </LinearLayout>
+        </FrameLayout>
 </layout>

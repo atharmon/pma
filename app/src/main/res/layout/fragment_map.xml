@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.map.MapFragment">
+
+    <data>
+        <variable
+            name="mainFragment"
+            type="xyz.atharmon.pma.ui.map.MapFragment" />
+        <variable
+            name="portalItemViewModel"
+            type="xyz.atharmon.pma.model.PortalItemViewModel" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/textfield"
+            android:text="@{@string/map_areas(portalItemViewModel.numOfAreas)}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.esri.arcgisruntime.mapping.view.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</layout>

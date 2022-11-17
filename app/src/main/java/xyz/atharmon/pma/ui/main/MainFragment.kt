@@ -1,31 +1,37 @@
 package xyz.atharmon.pma.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import com.esri.arcgisruntime.mapping.view.MapView
+import xyz.atharmon.pma.R
+import xyz.atharmon.pma.adapter.MapAreaAdapter
 import xyz.atharmon.pma.databinding.FragmentMainBinding
 import xyz.atharmon.pma.model.PortalItemViewModel
 
 class MainFragment : Fragment() {
+
+    companion object {
+        const val TAG = "MainFragment"
+    }
 
     private val viewModel: PortalItemViewModel by viewModels()
 
     private val mainFragmentBinding by lazy {
         FragmentMainBinding.inflate(layoutInflater)
     }
-
-    private val mapView: MapView by lazy {
-        mainFragmentBinding.mapView
-    }
+//    private lateinit val mainFragmentBinding: FragmentMainBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+//        mainFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+
         return mainFragmentBinding.root
     }
 
@@ -33,27 +39,15 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mainFragmentBinding.portalItemViewModel = viewModel
-
         mainFragmentBinding.lifecycleOwner = viewLifecycleOwner
+        // TODO: Need to check if any previously downloaded map areas exist
 
+        // Need to load the preplanned map areas
+        // How to set the adapter to an observable and have it populate upon emitting a value?
+        mainFragmentBinding.mapAreasRecyclerView.adapter = MapAreaAdapter(viewModel.mapAreas)
 
-        // Set the map to the map view
-        mapView.map = viewModel.map
     }
 
-    override fun onResume() {
-        super.onResume()
-        mapView.resume()
-    }
 
-    override fun onPause() {
-        mapView.pause()
-        super.onPause()
-    }
-
-    override fun onDestroy() {
-        mapView.dispose()
-        super.onDestroy()
-    }
 
 }
