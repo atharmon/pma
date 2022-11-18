@@ -3,7 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/atharmon91/Android/Ports/PMA/app/src/main/res/drawable/ic_check_circle_grey_24.xml" value="0.1035" />
         <entry key="..\:/atharmon91/Android/Ports/PMA/app/src/main/res/layout/activity_main.xml" value="0.20260416666666667" />
+        <entry key="..\:/atharmon91/Android/Ports/PMA/app/src/main/res/layout/adapter_header.xml" value="0.409375" />
+        <entry key="..\:/atharmon91/Android/Ports/PMA/app/src/main/res/layout/adapter_map_area.xml" value="0.12777777777777777" />
+        <entry key="..\:/atharmon91/Android/Ports/PMA/app/src/main/res/layout/fragment_main.xml" value="0.17268041237113402" />
+        <entry key="..\:/atharmon91/Android/Ports/PMA/app/src/main/res/layout/fragment_map.xml" value="0.12777777777777777" />
+        <entry key="..\:/atharmon91/Android/Ports/PMA/app/src/main/res/menu/mapmenu.xml" value="0.221875" />
       </map>
     </option>
   </component>
