@@ -10,6 +10,9 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import xyz.atharmon.pma.R
 import xyz.atharmon.pma.adapter.MapAreaAdapter
 import xyz.atharmon.pma.databinding.FragmentMainBinding
@@ -45,8 +48,13 @@ class MainFragment : Fragment() {
         mainFragmentBinding.webMapTitle.text = viewModel.webMap.title
         mainFragmentBinding.webMapSnippet.text = viewModel.webMap.snippet
         mainFragmentBinding.webMapThumbnailPreview.setImageBitmap(viewModel.getThumbnailPreview(viewModel.webMap))
+        mainFragmentBinding.webMapLayout.setOnClickListener {
+            val action: NavDirections = MainFragmentDirections.actionMainFragmentToMapFragment(-1)
+            findNavController().navigate(action)
+        }
 
-        mainFragmentBinding.mapAreasRecyclerView.adapter = MapAreaAdapter(viewModel.mapAreas)
+        val directory = context?.getExternalFilesDir(null)?.path
+        mainFragmentBinding.mapAreasRecyclerView.adapter = MapAreaAdapter(viewModel.mapAreas, directory)
 
     }
 

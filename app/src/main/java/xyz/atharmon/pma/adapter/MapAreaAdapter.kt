@@ -24,28 +24,19 @@ import xyz.atharmon.pma.R
 import xyz.atharmon.pma.data.DataSource
 import xyz.atharmon.pma.ui.main.MainFragment
 import xyz.atharmon.pma.ui.main.MainFragmentDirections
+import java.io.File
 
-class MapAreaAdapter(private val mapAreas: MutableList<PreplannedMapArea>) :
+class MapAreaAdapter(private val mapAreas: MutableList<PreplannedMapArea>, val packageDirectory: String?) :
     RecyclerView.Adapter<MapAreaAdapter.MapAreaViewHolder>() {
-
-    companion object {
-        const val TYPE_HEADER = 0
-        const val TYPE_ITEM = 1
-    }
-//    val data = DataSource.preplannedMaps
 
     class MapAreaViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val thumbnailPreview: ImageView = view.findViewById(R.id.map_area_thumbnail_preview)
         val title: TextView = view.findViewById(R.id.map_area_title)
         val snippet: TextView = view.findViewById(R.id.map_area_snippet)
+        val checkmark: ImageView = view.findViewById(R.id.map_area_downloaded_image)
     }
 
-//    class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-//        val title = view.findViewById<TextView>(R.id.adapter_header_text)
-//    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MapAreaViewHolder {
-        Log.d("Adapter", "viewType $viewType")
         val adapterLayout =
             LayoutInflater.from(parent.context).inflate(R.layout.adapter_map_area, parent, false)
 
@@ -54,17 +45,6 @@ class MapAreaAdapter(private val mapAreas: MutableList<PreplannedMapArea>) :
 
     override fun getItemCount(): Int = mapAreas.size
 
-    override fun getItemViewType(position: Int): Int {
-        val mapArea = mapAreas[position]
-
-        return if (mapArea.portalItem.type === PortalItem.Type.WEBMAP) {
-            TYPE_HEADER
-        } else {
-            TYPE_ITEM
-        }
-
-    }
-
     override fun onBindViewHolder(holder: MapAreaViewHolder, position: Int) {
         val mapArea = mapAreas[position]
 
@@ -72,6 +52,14 @@ class MapAreaAdapter(private val mapAreas: MutableList<PreplannedMapArea>) :
         holder.thumbnailPreview.setImageBitmap(thumbnailPreview)
         holder.title.text = mapArea.portalItem.title
         holder.snippet.text = mapArea.portalItem.snippet
+
+        val packagePath = packageDirectory + "PreplannedOfflineMap_" + mapArea.portalItem.itemId
+        val existingMapPackage = File(packagePath)
+        Log.d("Adapter", "Exists? ${existingMapPackage.exists()} -> ${mapArea.portalItem.itemId}")
+        if (existingMapPackage.exists()) {
+            holder.checkmark.visibility = ImageView.VISIBLE
+            holder.checkmark.setImageResource(R.drawable.ic_check_circle_grey_24)
+        }
 
         holder.view.setOnClickListener {
             val action: NavDirections = MainFragmentDirections.actionMainFragmentToMapFragment(position)

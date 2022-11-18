@@ -11,37 +11,31 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavDirections
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.esri.arcgisruntime.concurrent.Job
 import com.esri.arcgisruntime.loadable.LoadStatus
 import com.esri.arcgisruntime.mapping.MobileMapPackage
 import com.esri.arcgisruntime.mapping.view.MapView
-import com.esri.arcgisruntime.portal.PortalItem
-import com.esri.arcgisruntime.tasks.offlinemap.DownloadPreplannedOfflineMapJob
 import com.esri.arcgisruntime.tasks.offlinemap.DownloadPreplannedOfflineMapParameters
 import com.esri.arcgisruntime.tasks.offlinemap.OfflineMapTask
 import com.esri.arcgisruntime.tasks.offlinemap.PreplannedUpdateMode
 import xyz.atharmon.pma.R
 import xyz.atharmon.pma.databinding.FragmentMapBinding
 import xyz.atharmon.pma.model.PortalItemViewModel
-import xyz.atharmon.pma.ui.main.MainFragment
-import xyz.atharmon.pma.ui.main.MainFragmentDirections
 import java.io.File
-import kotlin.properties.Delegates
 
 class MapFragment : Fragment() {
 
     companion object {
         const val TAG = "MapFragment"
+        const val WEB_MAP = -1
     }
 
     private val viewModel: PortalItemViewModel by activityViewModels()
-    val args: MapFragmentArgs by navArgs()
+    private val args: MapFragmentArgs by navArgs()
 
     private val mapFragmentBinding by lazy {
         FragmentMapBinding.inflate(layoutInflater)
@@ -61,7 +55,7 @@ class MapFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return mapFragmentBinding.root
     }
 
@@ -73,44 +67,72 @@ class MapFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
         }
 
+        // Determine if web map or map area
+        val isWebMap = args.position == WEB_MAP
+
+        // Setup the menu
         val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(object: MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.mapmenu, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-                    R.id.action_delete_mappackage -> {
-                        deleteDownloadedMapPackage()
-                        true
-                    }
-                    else -> false
+        if (!isWebMap) {
+            menuHost.addMenuProvider(object: MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.mapmenu, menu)
                 }
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
-        setActionBarTitle()
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    return when (menuItem.itemId) {
+                        R.id.action_delete_mappackage -> {
+                            deleteDownloadedMapPackage(context)
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        }
 
-        packagePath = context?.getExternalFilesDir(null)?.path + "PreplannedOfflineMap_" + viewModel.mapAreas[args.position].portalItem.itemId
+
+
+
+
+        // Set portalItem.title as the action/toolbar title
+        setActionBarTitle(isWebMap)
 
         // Set map to the map view
-        context?.let { createOfflineMapTask(args.position, it)}
+        if (isWebMap) {
+            mapView.map = viewModel.map
+        } else {
+            // Set the packagePath for use in download / delete map package functions
+            packagePath = context?.getExternalFilesDir(null)?.path + "PreplannedOfflineMap_" + viewModel.mapAreas[args.position].portalItem.itemId
+
+            context?.let { createOfflineMapTask(args.position, it)}
+        }
+
     }
 
 
 
-    private fun setActionBarTitle() {
-        (activity as AppCompatActivity).supportActionBar?.title = viewModel.mapAreas[args.position].portalItem.title
+    private fun setActionBarTitle(isWebMap: Boolean) {
+        if (isWebMap) {
+            (activity as AppCompatActivity).supportActionBar?.title = viewModel.webMap.title
+        } else {
+            (activity as AppCompatActivity).supportActionBar?.title = viewModel.mapAreas[args.position].portalItem.title
+        }
+
     }
 
-    private fun deleteDownloadedMapPackage() {
-        Log.d("MapFragment", "Deleting map package at: $packagePath")
-        val someDir = File(packagePath)
-        someDir.deleteRecursively()
+    private fun deleteDownloadedMapPackage(context: Context?) {
+        Log.d(TAG, "Deleting map package at: $packagePath")
+        val packageDir = File(packagePath)
+        if (packageDir.deleteRecursively()) {
+            Toast.makeText(context, "Map area successfully removed", Toast.LENGTH_LONG).show()
 
-        val action: NavDirections = MapFragmentDirections.actionMapFragmentToMainFragment()
-        findNavController().navigate(action)
+            val action: NavDirections = MapFragmentDirections.actionMapFragmentToMainFragment()
+            findNavController().navigate(action)
+        } else {
+            Toast.makeText(context, "Could not remove map area", Toast.LENGTH_LONG).show()
+        }
+
+
 
     }
 
@@ -125,15 +147,17 @@ class MapFragment : Fragment() {
             val params = createDefaultDownload.get().apply {
                 updateMode = PreplannedUpdateMode.NO_UPDATES
             }
-            downloadMap(offlineMapTask, params, context, position)
+            downloadMap(offlineMapTask, params, context)
         }
 
     }
 
-    private fun downloadMap(offlineMapTask: OfflineMapTask, params: DownloadPreplannedOfflineMapParameters, context: Context, position: Int) {
+    private fun downloadMap(offlineMapTask: OfflineMapTask, params: DownloadPreplannedOfflineMapParameters, context: Context) {
+        progressBar.visibility = ProgressBar.VISIBLE
+
         val job = offlineMapTask.downloadPreplannedOfflineMap(params, packagePath).apply {
             addProgressChangedListener {
-                Log.d("ViewModel", "$progress")
+                Log.d(TAG, "$progress")
                 progressBar.progress = progress
             }
 

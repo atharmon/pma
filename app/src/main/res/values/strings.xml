@@ -4,4 +4,5 @@
     <string name="map_fragment_title">Map</string>
     <string name="map_areas">Number of preplanned map areas: %d</string>
     <string name="map_area_thumbnail_description">A thumbnail preview of the preplanned map area</string>
+    <string name="map_area_downloaded_description">Map area has been saved locally</string>
 </resources>

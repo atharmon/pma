@@ -3,8 +3,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="8dp">
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/map_area_thumbnail_preview"
@@ -19,21 +20,39 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/map_area_title"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:tooltipText="This is the title" />
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/map_area_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/map_area_downloaded_image"
+                android:scaleType="fitCenter"
+                android:visibility="visible"
+                android:layout_gravity="bottom"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/map_area_downloaded_description" />
+
+        </LinearLayout>
+
+
 
         <TextView
             android:id="@+id/map_area_snippet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="3"
-            android:textSize="14sp"
-            android:tooltipText="This is the snippet" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 
