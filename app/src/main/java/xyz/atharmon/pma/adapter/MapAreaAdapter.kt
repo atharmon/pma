@@ -18,13 +18,14 @@ import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.esri.arcgisruntime.portal.PortalItem
+import com.esri.arcgisruntime.tasks.offlinemap.PreplannedMapArea
 import kotlinx.coroutines.NonDisposableHandle.parent
 import xyz.atharmon.pma.R
 import xyz.atharmon.pma.data.DataSource
 import xyz.atharmon.pma.ui.main.MainFragment
 import xyz.atharmon.pma.ui.main.MainFragmentDirections
 
-class MapAreaAdapter(private val mapAreas: MutableList<PortalItem>) :
+class MapAreaAdapter(private val mapAreas: MutableList<PreplannedMapArea>) :
     RecyclerView.Adapter<MapAreaAdapter.MapAreaViewHolder>() {
 
     companion object {
@@ -54,9 +55,9 @@ class MapAreaAdapter(private val mapAreas: MutableList<PortalItem>) :
     override fun getItemCount(): Int = mapAreas.size
 
     override fun getItemViewType(position: Int): Int {
-        val portalItem = mapAreas[position]
+        val mapArea = mapAreas[position]
 
-        return if (portalItem.type === PortalItem.Type.WEBMAP) {
+        return if (mapArea.portalItem.type === PortalItem.Type.WEBMAP) {
             TYPE_HEADER
         } else {
             TYPE_ITEM
@@ -67,10 +68,10 @@ class MapAreaAdapter(private val mapAreas: MutableList<PortalItem>) :
     override fun onBindViewHolder(holder: MapAreaViewHolder, position: Int) {
         val mapArea = mapAreas[position]
 
-        val thumbnailPreview = getThumbnailPreview(mapArea)
+        val thumbnailPreview = getThumbnailPreview(mapArea.portalItem)
         holder.thumbnailPreview.setImageBitmap(thumbnailPreview)
-        holder.title.text = mapArea.title
-        holder.snippet.text = mapArea.snippet
+        holder.title.text = mapArea.portalItem.title
+        holder.snippet.text = mapArea.portalItem.snippet
 
         holder.view.setOnClickListener {
             val action: NavDirections = MainFragmentDirections.actionMainFragmentToMapFragment(position)

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import xyz.atharmon.pma.R
 import xyz.atharmon.pma.adapter.MapAreaAdapter
@@ -20,7 +21,7 @@ class MainFragment : Fragment() {
         const val TAG = "MainFragment"
     }
 
-    private val viewModel: PortalItemViewModel by viewModels()
+    private val viewModel: PortalItemViewModel by activityViewModels()
 
     private val mainFragmentBinding by lazy {
         FragmentMainBinding.inflate(layoutInflater)
