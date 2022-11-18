@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -48,15 +49,14 @@ class MapFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
         }
 
-        getPortalItemIdFromArgsPosition()
+        setActionBarTitle()
 
         // Set map to the map view
         mapView.map = viewModel.map
     }
 
-    fun getPortalItemIdFromArgsPosition() {
-        val text = "PortalItem id: ${viewModel.mapAreas[args.position].itemId}"
-        mapFragmentBinding.textfield.text = text
+    fun setActionBarTitle() {
+        (activity as AppCompatActivity).supportActionBar?.title = viewModel.mapAreas[args.position].title
     }
 
     override fun onResume() {

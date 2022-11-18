@@ -68,11 +68,11 @@ class MapAreaAdapter(private val mapAreas: MutableList<PortalItem>) :
         val mapArea = mapAreas[position]
 
         val thumbnailPreview = getThumbnailPreview(mapArea)
-        holder.thumbnailPreview?.setImageBitmap(thumbnailPreview)
-        holder.title?.text = mapArea.title
-        holder.snippet?.text = mapArea.snippet
+        holder.thumbnailPreview.setImageBitmap(thumbnailPreview)
+        holder.title.text = mapArea.title
+        holder.snippet.text = mapArea.snippet
 
-        holder.itemView.setOnClickListener {
+        holder.view.setOnClickListener {
             val action: NavDirections = MainFragmentDirections.actionMainFragmentToMapFragment(position)
             holder.view.findNavController().navigate(action)
         }
