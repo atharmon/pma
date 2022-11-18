@@ -34,6 +34,8 @@ class ViewModel : ViewModel() {
         // Pull the API key from the BuildConfig value set in build.gradle (app)
         ArcGISRuntimeEnvironment.setApiKey(BuildConfig.ARCGIS_RUNTIME_API)
 
+
+
         // create the map from the item
         _map = ArcGISMap(_webMap)
 

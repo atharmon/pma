@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:indeterminate="false"
-            android:progressTint="?attr/colorSecondary"
+            android:progressTint="@color/pink_custom_light"
             android:scaleY="3"
             android:visibility="gone" />
 

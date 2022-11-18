@@ -6,5 +6,5 @@
     <string name="map_area_thumbnail_description">A thumbnail preview of the preplanned map area</string>
     <string name="map_area_downloaded_description">Map area has been saved locally</string>
     <string name="web_map">Web Map</string>
-    <string name="map_menu_action_delete">Refresh</string>
+    <string name="map_menu_action_delete">Remove map area</string>
 </resources>

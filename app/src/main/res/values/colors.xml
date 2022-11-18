@@ -7,6 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey">#F5F5F5</color>
+    <color name="grey_dark">#C2C2C2</color>
+    <color name="maine_blue">#002664</color>
+    <color name="maine_blue_dark">#000039</color>
     <color name="blue_700">#1976D2</color>
     <color name="blue_700_light">#63A4FF</color>
     <color name="blue_700_dark">#004BA0</color>
