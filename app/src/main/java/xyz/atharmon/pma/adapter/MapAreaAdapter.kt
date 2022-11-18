@@ -32,7 +32,7 @@ class MapAreaAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MapAreaViewHolder {
         val adapterLayout =
-            LayoutInflater.from(parent.context).inflate(R.layout.adapter_map_area, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.view_holder_map_area, parent, false)
 
         return MapAreaViewHolder(adapterLayout)
     }
