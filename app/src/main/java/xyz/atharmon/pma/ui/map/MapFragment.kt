@@ -24,7 +24,7 @@ import com.esri.arcgisruntime.tasks.offlinemap.OfflineMapTask
 import com.esri.arcgisruntime.tasks.offlinemap.PreplannedUpdateMode
 import xyz.atharmon.pma.R
 import xyz.atharmon.pma.databinding.FragmentMapBinding
-import xyz.atharmon.pma.model.PortalItemViewModel
+import xyz.atharmon.pma.model.ViewModel
 import java.io.File
 
 class MapFragment : Fragment() {
@@ -34,7 +34,7 @@ class MapFragment : Fragment() {
         const val WEB_MAP = -1
     }
 
-    private val viewModel: PortalItemViewModel by activityViewModels()
+    private val viewModel: ViewModel by activityViewModels()
     private val args: MapFragmentArgs by navArgs()
 
     private val mapFragmentBinding by lazy {

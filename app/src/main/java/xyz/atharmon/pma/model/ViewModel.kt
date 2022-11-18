@@ -15,7 +15,7 @@ import xyz.atharmon.pma.BuildConfig
 
 private const val webMapId = "3bc3179f17da44a0ac0bfdac4ad15664"
 
-class PortalItemViewModel : ViewModel() {
+class ViewModel : ViewModel() {
     private val _webMap: PortalItem =
         PortalItem(Portal("https://www.arcgis.com", false), webMapId)
     val webMap: PortalItem

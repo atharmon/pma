@@ -11,7 +11,7 @@
 
         <variable
             name="portalItemViewModel"
-            type="xyz.atharmon.pma.model.PortalItemViewModel" />
+            type="xyz.atharmon.pma.model.ViewModel" />
     </data>
 
     <LinearLayout
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:indeterminate="false"
-            android:progressTint="@color/black"
+            android:progressTint="?attr/colorSecondary"
             android:scaleY="3"
             android:visibility="gone" />
 

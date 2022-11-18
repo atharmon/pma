@@ -10,11 +10,11 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import xyz.atharmon.pma.adapter.MapAreaAdapter
 import xyz.atharmon.pma.databinding.FragmentMainBinding
-import xyz.atharmon.pma.model.PortalItemViewModel
+import xyz.atharmon.pma.model.ViewModel
 
 class MainFragment : Fragment() {
 
-    private val viewModel: PortalItemViewModel by activityViewModels()
+    private val viewModel: ViewModel by activityViewModels()
 
     private val mainFragmentBinding by lazy {
         FragmentMainBinding.inflate(layoutInflater)

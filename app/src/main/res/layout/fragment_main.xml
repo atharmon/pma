@@ -12,7 +12,7 @@
 
         <variable
             name="portalItemViewModel"
-            type="xyz.atharmon.pma.model.PortalItemViewModel" />
+            type="xyz.atharmon.pma.model.ViewModel" />
     </data>
 
     <LinearLayout
