@@ -14,9 +14,66 @@
                     type="xyz.atharmon.pma.model.PortalItemViewModel" />
         </data>
 
-        <FrameLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+                <TextView
+                    android:text="Web Map"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:padding="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                        <ImageView
+                            android:id="@+id/web_map_thumbnail_preview"
+                            android:layout_width="140dp"
+                            android:layout_height="70dp"
+                            android:contentDescription="@string/map_area_thumbnail_description"
+                            android:scaleType="fitCenter" />
+
+                        <LinearLayout
+                            android:id="@+id/web_map_title_and_snippet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/web_map_title"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    android:tooltipText="This is the title" />
+
+                                <TextView
+                                    android:id="@+id/web_map_snippet"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:maxLines="3"
+                                    android:textSize="14sp"
+                                    android:tooltipText="This is the snippet" />
+
+                        </LinearLayout>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:text="Map areas"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:padding="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/map_areas_recycler_view"
@@ -24,5 +81,5 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
-        </FrameLayout>
+        </LinearLayout>
 </layout>

@@ -1,6 +1,8 @@
 package xyz.atharmon.pma.model
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build.VERSION_CODES.P
 import android.util.Log
 import android.widget.Toast
@@ -100,6 +102,22 @@ class PortalItemViewModel : ViewModel() {
             }
         }
 
+    }
+
+    fun getThumbnailPreview(portalItem: PortalItem): Bitmap {
+        val thumbnailFuture = portalItem.fetchThumbnailAsync()
+
+        // Make sure the Future is done before we access it
+        while (!thumbnailFuture.isDone) {
+            Log.d("ViewModel", "Fetching the thumbnail...")
+        }
+
+        val thumbnail = thumbnailFuture.get()
+
+        // Decode byte array into a bitmap for the ImageView
+        val bmp = BitmapFactory.decodeByteArray(thumbnail, 0, thumbnail.size);
+
+        return bmp
     }
 
 //    fun createOfflineMapTask(position: Int, context: Context) {

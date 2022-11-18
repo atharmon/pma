@@ -31,7 +31,6 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         return mainFragmentBinding.root
     }
 
@@ -42,10 +41,11 @@ class MainFragment : Fragment() {
             portalItemViewModel = viewModel
             lifecycleOwner = viewLifecycleOwner
         }
-        // TODO: Need to check if any previously downloaded map areas exist
 
-        // Need to load the preplanned map areas
-        // How to set the adapter to an observable and have it populate upon emitting a value?
+        mainFragmentBinding.webMapTitle.text = viewModel.webMap.title
+        mainFragmentBinding.webMapSnippet.text = viewModel.webMap.snippet
+        mainFragmentBinding.webMapThumbnailPreview.setImageBitmap(viewModel.getThumbnailPreview(viewModel.webMap))
+
         mainFragmentBinding.mapAreasRecyclerView.adapter = MapAreaAdapter(viewModel.mapAreas)
 
     }

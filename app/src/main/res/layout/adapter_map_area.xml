@@ -37,21 +37,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/button_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp">
-
-        <ImageButton
-            android:id="@+id/download_map_area"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Download" />
-
-    </LinearLayout>
-
 
 </LinearLayout>
 
