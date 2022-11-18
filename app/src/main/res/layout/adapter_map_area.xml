@@ -3,9 +3,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:paddingTop="4dp"
-    android:paddingBottom="4dp"
-    android:orientation="horizontal">
+    android:paddingBottom="4dp">
 
     <ImageView
         android:id="@+id/map_area_thumbnail_preview"
@@ -21,9 +21,9 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/map_area_title"
@@ -34,17 +34,16 @@
 
             <ImageView
                 android:id="@+id/map_area_downloaded_image"
-                android:scaleType="fitCenter"
-                android:visibility="visible"
-                android:layout_gravity="bottom"
-                android:paddingStart="4dp"
-                android:paddingEnd="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/map_area_downloaded_description" />
+                android:layout_gravity="bottom"
+                android:contentDescription="@string/map_area_downloaded_description"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:scaleType="fitCenter"
+                android:visibility="visible" />
 
         </LinearLayout>
-
 
 
         <TextView

@@ -2,31 +2,25 @@ package xyz.atharmon.pma.adapter
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.FragmentNavigatorDestinationBuilder
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.esri.arcgisruntime.portal.PortalItem
 import com.esri.arcgisruntime.tasks.offlinemap.PreplannedMapArea
-import kotlinx.coroutines.NonDisposableHandle.parent
 import xyz.atharmon.pma.R
-import xyz.atharmon.pma.data.DataSource
-import xyz.atharmon.pma.ui.main.MainFragment
 import xyz.atharmon.pma.ui.main.MainFragmentDirections
 import java.io.File
 
-class MapAreaAdapter(private val mapAreas: MutableList<PreplannedMapArea>, val packageDirectory: String?) :
+class MapAreaAdapter(
+    private val mapAreas: MutableList<PreplannedMapArea>,
+    val packageDirectory: String?
+) :
     RecyclerView.Adapter<MapAreaAdapter.MapAreaViewHolder>() {
 
     class MapAreaViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
@@ -62,7 +56,8 @@ class MapAreaAdapter(private val mapAreas: MutableList<PreplannedMapArea>, val p
         }
 
         holder.view.setOnClickListener {
-            val action: NavDirections = MainFragmentDirections.actionMainFragmentToMapFragment(position)
+            val action: NavDirections =
+                MainFragmentDirections.actionMainFragmentToMapFragment(position)
             holder.view.findNavController().navigate(action)
         }
     }

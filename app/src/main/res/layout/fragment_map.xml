@@ -4,27 +4,30 @@
     tools:context=".ui.map.MapFragment">
 
     <data>
+
         <variable
             name="mapFragment"
             type="xyz.atharmon.pma.ui.map.MapFragment" />
+
         <variable
             name="portalItemViewModel"
             type="xyz.atharmon.pma.model.PortalItemViewModel" />
     </data>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <ProgressBar
             android:id="@+id/map_download_progress_bar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:indeterminate="false"
-            android:scaleY="3" />
+            android:progressTint="@color/black"
+            android:scaleY="3"
+            android:visibility="gone" />
 
         <com.esri.arcgisruntime.mapping.view.MapView
             android:id="@+id/mapView"

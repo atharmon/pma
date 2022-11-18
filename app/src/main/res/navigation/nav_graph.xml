@@ -22,7 +22,7 @@
         android:id="@+id/mainFragment"
         android:name="xyz.atharmon.pma.ui.main.MainFragment"
         android:label="@string/main_fragment_title"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
@@ -32,7 +32,7 @@
         android:id="@+id/mapFragment"
         android:name="xyz.atharmon.pma.ui.map.MapFragment"
         android:label="@string/map_fragment_title"
-        tools:layout="@layout/fragment_map" >
+        tools:layout="@layout/fragment_map">
         <argument
             android:name="position"
             app:argType="integer" />

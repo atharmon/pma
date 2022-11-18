@@ -1,89 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.main.MainFragment">
 
-        <data>
-                <variable
-                    name="mainFragment"
-                    type="xyz.atharmon.pma.ui.main.MainFragment" />
-                <variable
-                    name="portalItemViewModel"
-                    type="xyz.atharmon.pma.model.PortalItemViewModel" />
-        </data>
+    <data>
+
+        <variable
+            name="mainFragment"
+            type="xyz.atharmon.pma.ui.main.MainFragment" />
+
+        <variable
+            name="portalItemViewModel"
+            type="xyz.atharmon.pma.model.PortalItemViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/web_map_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/web_map"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
         <LinearLayout
-            android:id="@+id/web_map_layout"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:text="Web Map"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/web_map_thumbnail_preview"
+                android:layout_width="140dp"
+                android:layout_height="70dp"
+                android:contentDescription="@string/map_area_thumbnail_description"
+                android:scaleType="fitCenter" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/web_map_title_and_snippet"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/web_map_thumbnail_preview"
-                    android:layout_width="140dp"
-                    android:layout_height="70dp"
-                    android:contentDescription="@string/map_area_thumbnail_description"
-                    android:scaleType="fitCenter" />
-
-                <LinearLayout
-                    android:id="@+id/web_map_title_and_snippet"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/web_map_title"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/web_map_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:tooltipText="This is the title" />
-
-                    <TextView
-                        android:id="@+id/web_map_snippet"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:maxLines="3"
-                        android:textSize="14sp"
-                        android:tooltipText="This is the snippet" />
-
-                </LinearLayout>
-
+                <TextView
+                    android:id="@+id/web_map_snippet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="3"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:text="Map areas"
-                android:textSize="17sp"
-                android:textStyle="bold" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/map_areas_recycler_view"
-                    android:scrollbars="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/cardview_shadow_start_color" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/map_areas"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/map_areas_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </LinearLayout>
 </layout>
