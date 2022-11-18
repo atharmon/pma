@@ -1,56 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:padding="8dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
 
     <ImageView
         android:id="@+id/map_area_thumbnail_preview"
-        android:scaleType="fitCenter"
         android:layout_width="140dp"
         android:layout_height="70dp"
-        android:contentDescription="@string/map_area_thumbnail_description" />
+        android:contentDescription="@string/map_area_thumbnail_description"
+        android:scaleType="fitCenter" />
 
     <LinearLayout
         android:id="@+id/map_area_title_and_snippet"
-        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/map_area_title"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:tooltipText="This is the title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:tooltipText="This is the title" />
 
         <TextView
             android:id="@+id/map_area_snippet"
-            android:textSize="14sp"
-            android:maxLines="3"
-            android:tooltipText="This is the snippet"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:textSize="14sp"
+            android:tooltipText="This is the snippet" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/button_group"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp">
 
         <ImageButton
             android:id="@+id/download_map_area"
-            android:text="Download"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Download" />
 
     </LinearLayout>
 
 
-
 </LinearLayout>
+

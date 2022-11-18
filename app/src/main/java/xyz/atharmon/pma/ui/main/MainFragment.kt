@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import xyz.atharmon.pma.R
@@ -24,13 +25,11 @@ class MainFragment : Fragment() {
     private val mainFragmentBinding by lazy {
         FragmentMainBinding.inflate(layoutInflater)
     }
-//    private lateinit val mainFragmentBinding: FragmentMainBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-//        mainFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
 
         return mainFragmentBinding.root
     }
@@ -38,8 +37,10 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainFragmentBinding.portalItemViewModel = viewModel
-        mainFragmentBinding.lifecycleOwner = viewLifecycleOwner
+        mainFragmentBinding.apply {
+            portalItemViewModel = viewModel
+            lifecycleOwner = viewLifecycleOwner
+        }
         // TODO: Need to check if any previously downloaded map areas exist
 
         // Need to load the preplanned map areas
@@ -47,7 +48,5 @@ class MainFragment : Fragment() {
         mainFragmentBinding.mapAreasRecyclerView.adapter = MapAreaAdapter(viewModel.mapAreas)
 
     }
-
-
 
 }

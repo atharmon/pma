@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.esri.arcgisruntime.mapping.view.MapView
+import com.esri.arcgisruntime.portal.PortalItem
 import xyz.atharmon.pma.databinding.FragmentMapBinding
 import xyz.atharmon.pma.model.PortalItemViewModel
 import xyz.atharmon.pma.ui.main.MainFragment
+import kotlin.properties.Delegates
 
 class MapFragment : Fragment() {
 
@@ -19,6 +22,7 @@ class MapFragment : Fragment() {
     }
 
     private val viewModel: PortalItemViewModel by viewModels()
+    val args: MapFragmentArgs by navArgs()
 
     private val mapFragmentBinding by lazy {
         FragmentMapBinding.inflate(layoutInflater)
@@ -39,12 +43,20 @@ class MapFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mapFragmentBinding.portalItemViewModel = viewModel
+        mapFragmentBinding.apply {
+            portalItemViewModel = viewModel
+            lifecycleOwner = viewLifecycleOwner
+        }
 
-        mapFragmentBinding.lifecycleOwner = viewLifecycleOwner
+        getPortalItemIdFromArgsPosition()
 
         // Set map to the map view
         mapView.map = viewModel.map
+    }
+
+    fun getPortalItemIdFromArgsPosition() {
+        val text = "PortalItem id: ${viewModel.mapAreas[args.position].itemId}"
+        mapFragmentBinding.textfield.text = text
     }
 
     override fun onResume() {

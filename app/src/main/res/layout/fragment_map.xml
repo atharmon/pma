@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="mainFragment"
+            name="mapFragment"
             type="xyz.atharmon.pma.ui.map.MapFragment" />
         <variable
             name="portalItemViewModel"
@@ -19,7 +19,6 @@
 
         <TextView
             android:id="@+id/textfield"
-            android:text="@{@string/map_areas(portalItemViewModel.numOfAreas)}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
